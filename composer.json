@@ -1,0 +1,98 @@
+{
+    "name": "Backend App",
+    "type": "project",
+    "description": "API",
+    "keywords": ["backend", "api"],
+    "license": "MIT",
+    "authors": [
+
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-pgsql": "*",
+        "ext-redis": "*",
+        "barryvdh/laravel-dompdf": "^0.9.0",
+        "darkaonline/l5-swagger": "^8.0",
+        "doctrine/dbal": "^3.2",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.4",
+        "laravel/framework": "^8.77",
+        "laravel/passport": "^10.2",
+        "laravel/tinker": "^2.6",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-cached-adapter": "~1.0",
+        "propaganistas/laravel-phone": "^4.3",
+        "ramsey/uuid": "^4.2",
+        "twilio/sdk": "^6.32"
+    },
+    "require-dev": {
+        "brianium/paratest": "^6.4",
+        "composer/composer": "^2.2",
+        "enlightn/security-checker": "^1.9",
+        "facade/ignition": "^2.17",
+        "fakerphp/faker": "^1.17",
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "hamcrest/hamcrest-php": "^2.0",
+        "laravel/sail": "^1.12",
+        "mockery/mockery": "^1.4",
+        "nunomaduro/collision": "^5.10",
+        "nunomaduro/larastan": "^1.0",
+        "nunomaduro/phpinsights": "^2.0",
+        "phpunit/phpunit": "^9",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Modules\\": "modules/",
+            "Infrastructure\\": "infrastructure/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "php -dpcov.directory=. ./vendor/bin/phpunit --coverage-html=./coverage",
+        "test:ci": "php -dpcov.directory=. ./vendor/bin/phpunit --coverage-text --colors=never",
+        "phpcs": "phpcs ./app ./infrastructure ./modules ./tests --ignore=app/Enums/*",
+        "phpcs:fix": "phpcbf ./app ./modules ./tests --ignore=app/Enums/*",
+        "security:check": "security-checker security:check ./composer.lock",
+        "phpinsights": "phpinsights",
+        "phpstan": "phpstan",
+        "phpinsights:summary": "phpinsights --summary",
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": false,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
